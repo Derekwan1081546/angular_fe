@@ -1,26 +1,6 @@
 <div class="container-fluid">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 g-4">
-    <div class="col">
-      <div class="card border-light shadow-sm">
-        <img
-          src="/assets/luke-chesser-eICUFSeirc0-unsplash.jpg"
-          class="card-img-top hover-overlay"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">Yolo V8 Testing</h5>
-          <p class="card-text">
-            This is yolo8 testing example for private usage. Click and follow
-            the instruction to run the example.
-          </p>
-          <div class="d-grid gap-2 col-4 ms-auto">
-            <a class="btn custom-btn" routerLink="/">Start</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
+    <div class="col" *ngFor="let example of examples">
       <div class="card border-light shadow-sm">
         <img
           src="/assets/luke-chesser-eICUFSeirc0-unsplash.jpg"
@@ -28,73 +8,12 @@
           alt="..."
         />
         <div class="card-body">
-          <h5 class="card-title">Yolo V8 Training</h5>
+          <h5 class="card-title">{{ example.title }}</h5>
           <p class="card-text">
-            This is yolo8 training example for private usage. Click and follow
-            the instruction to run the example.
+            {{ example.description }}
           </p>
           <div class="d-grid gap-2 col-4 ms-auto">
-            <a class="btn custom-btn" routerLink="/">Start</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card border-light shadow-sm">
-        <img
-          src="/assets/luke-chesser-eICUFSeirc0-unsplash.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">Yolo V8 Detecting</h5>
-          <p class="card-text">
-            This is yolo8 dectecting example for private usage. Click and follow
-            the instruction to run the example.
-          </p>
-          <div class="d-grid gap-2 col-4 ms-auto">
-            <a class="btn custom-btn" routerLink="/">Start</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card border-light shadow-sm">
-        <img
-          src="/assets/luke-chesser-eICUFSeirc0-unsplash.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">Yolo3 Tiny Training</h5>
-          <p class="card-text">
-            This is yolo3 tiny testing example for private usage. Click and
-            follow the instruction to run the example.
-          </p>
-          <div class="d-grid gap-2 col-4 ms-auto">
-            <a class="btn custom-btn" routerLink="/">Start</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col">
-      <div class="card border-light shadow-sm">
-        <img
-          src="/assets/luke-chesser-eICUFSeirc0-unsplash.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">Yolo3 Tiny Testing</h5>
-          <p class="card-text">
-            This is yolo3 tiny testing example for private usage. Clicked and
-            follow the instruction to run the example.
-          </p>
-          <div class="d-grid gap-2 col-4 ms-auto">
-            <a class="btn custom-btn" routerLink="/">Start</a>
+            <a class="btn custom-btn" [routerLink]="['/model-examples', example.model]">Start</a>
           </div>
         </div>
       </div>
