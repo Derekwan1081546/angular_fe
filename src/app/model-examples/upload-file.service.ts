@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 export class UploadFileService {
   private static readonly UPLOAD_FILE_FOR_OD_TESTING =
     'http://54.210.89.75:8888/upload_image_file_for_od_model_testing';
+  statusObserver: Subject<boolean> = new Subject();
 
   constructor(private readonly http: HttpClient) {}
 
@@ -31,8 +33,10 @@ export class UploadFileService {
         if (event.type == HttpEventType.Response) {
           if (event.ok) {
             console.warn(event);
+            this.statusObserver.next(true);
           } else {
             console.error(event);
+            this.statusObserver.next(false);
           }
         }
       });

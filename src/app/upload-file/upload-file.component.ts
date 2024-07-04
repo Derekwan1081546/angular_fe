@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, input } from '@angular/core';
 import { UploadFileService } from '../model-examples/upload-file.service';
 
 class FileInfo {
@@ -31,13 +31,21 @@ export class UploadFileComponent implements OnInit {
   isDragOver: boolean = false;
   pageList: number[] = [0];
   showingPageList: number[] = [];
+  uploading: boolean = false;
+  uploadSuccess: boolean = false;
   @Input() accept: string = '*';
   @Input() numRows: number = 10;
   @Input() maxPageSize: number = 4;
+  @Input() title: string = '';
 
   constructor(private readonly service: UploadFileService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.service.statusObserver.subscribe((value) => {
+      this.uploading = false;
+      this.uploadSuccess = value;
+    });
+  }
 
   changePage(page: number) {
     if (page === this.currentPage) {
@@ -138,6 +146,7 @@ export class UploadFileComponent implements OnInit {
       console.error('fk');
       return;
     }
+    this.uploading = true;
     this.service.uploadOdTesting(this.files);
   }
 }
