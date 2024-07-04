@@ -3,16 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UploadFileComponent } from '../upload-file/upload-file.component';
+import { UploadFileService } from '../model-examples/upload-file.service';
 
 class SupportedModel {
   model: string = '';
-  uploadUrl: string = '';
+  uploadImgUrl: string = '';
+  uploadLabelUrl: string = '';
 
-  constructor(model: string, uploadUrl: string) {
+  constructor(model: string, uploadImgUrl: string, uploadLabelUrl: string) {
     this.model = model;
-    this.uploadUrl = uploadUrl;
+    this.uploadImgUrl = uploadImgUrl;
+    this.uploadLabelUrl = uploadLabelUrl;
   }
-};
+}
 
 @Component({
   selector: 'app-model-example-form',
@@ -26,15 +29,40 @@ export class ModelExampleFormComponent implements OnInit {
     model: new FormControl(''),
   });
   private model: string = '';
+  private static readonly SUPPORTED_MODELS = {
+    'yolov8-testing': new SupportedModel(
+      'yolov8-testing',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
+      UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING
+    ),
+    'yolov8-training': new SupportedModel(
+      'yolov8-training',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
+      UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING
+    ),
+  };
 
   supportedModels = [
-    new SupportedModel('yolov8-testing', 'yolov8-testing')
+    ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-testing'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-training'],
   ];
 
-  constructor(private readonly route: ActivatedRoute) {}
+  selectedModel: SupportedModel = this.supportedModels[0];
+
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly uploadService: UploadFileService
+  ) {}
 
   ngOnInit() {
     this.model = this.route.snapshot.paramMap.get('model')!;
-    this.uploadForm.get('model')!.setValue(this.model);
+    for (let index = 0; index < this.supportedModels.length; index++) {
+      const element = this.supportedModels[index];
+      if (element.model == this.model) {
+        this.uploadForm.get('model')!.setValue(this.model);
+        this.selectedModel = element;
+        break;
+      }
+    }
   }
 }

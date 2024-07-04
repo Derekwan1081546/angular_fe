@@ -37,11 +37,15 @@ export class UploadFileComponent implements OnInit {
   @Input() numRows: number = 10;
   @Input() maxPageSize: number = 4;
   @Input() title: string = '';
+  @Input() url: string = '';
 
   constructor(private readonly service: UploadFileService) {}
 
   ngOnInit() {
     this.service.statusObserver.subscribe((value) => {
+      if (!this.uploading) {
+        return;
+      }
       this.uploading = false;
       this.uploadSuccess = value;
     });
@@ -139,14 +143,14 @@ export class UploadFileComponent implements OnInit {
     this.currentPage = 0;
     this.pageList = [0];
     this.showingPageList = [];
+    this.uploadSuccess = false;
   }
 
   upload() {
     if (!this.files) {
-      console.error('fk');
       return;
     }
     this.uploading = true;
-    this.service.uploadOdTesting(this.files);
+    this.service.uploadOdTesting(this.files, this.url);
   }
 }
