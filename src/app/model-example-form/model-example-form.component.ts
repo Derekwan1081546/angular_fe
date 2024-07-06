@@ -50,11 +50,18 @@ export class ModelExampleFormComponent implements OnInit {
       UploadFileService.UPLOAD_LABEL_FOR_OD_TRAINING,
       'http://54.210.89.75:8888/download_yolo8_model_files'
     ),
+    'yolov8-detecting': new SupportedModel(
+      'yolov8-detecting',
+      'xxx',
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files'
+    ),
   };
 
   supportedModels = [
     ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-testing'],
     ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-training'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-detecting'],
   ];
 
   selectedModel: SupportedModel = this.supportedModels[0];

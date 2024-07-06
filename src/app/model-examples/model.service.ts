@@ -101,4 +101,39 @@ export class ModelService {
         },
       });
   }
+
+  yolo8Detecting() {
+    const data = JSON.stringify({
+    });
+    this.http
+      .post(ModelService.YOLO8_TRAIN, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  
 }
