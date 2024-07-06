@@ -19,8 +19,8 @@ export class ModelService {
   ) {
     const data = JSON.stringify({
       confidence_threshold: confidenceThreshold,
-      iou_threshold: resizeImageSize,
-      resize_image_size: iouThreshold,
+      iou_threshold: iouThreshold,
+      resize_image_size: resizeImageSize,
     });
     this.http
       .post(ModelService.YOLO8_TEST, data, {

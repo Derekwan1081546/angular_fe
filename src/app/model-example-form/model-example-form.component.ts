@@ -1,27 +1,47 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UploadFileComponent } from '../upload-file/upload-file.component';
 import { UploadFileService } from '../model-examples/upload-file.service';
 import { ModelService } from '../model-examples/model.service';
+
+class Parameter {
+  name: string = '';
+  defaultValue: string | number = 0;
+  type: string = 'text';
+
+  constructor(name: string, defaultValue: string | number, type: string) {
+    this.name = name;
+    this.defaultValue = defaultValue;
+    this.type = type;
+  }
+}
 
 class SupportedModel {
   model: string = '';
   uploadImgUrl: string = '';
   uploadLabelUrl: string = '';
   downloadUrl: string = '';
+  parameters: Parameter[] = [];
 
   constructor(
     model: string,
     uploadImgUrl: string,
     uploadLabelUrl: string,
-    downloadUrl: string
+    downloadUrl: string,
+    parameters: Parameter[]
   ) {
     this.model = model;
     this.uploadImgUrl = uploadImgUrl;
     this.uploadLabelUrl = uploadLabelUrl;
     this.downloadUrl = downloadUrl;
+    this.parameters = parameters;
   }
 }
 
@@ -33,28 +53,50 @@ class SupportedModel {
   styleUrl: './model-example-form.component.scss',
 })
 export class ModelExampleFormComponent implements OnInit {
+  parametersForm: FormGroup = new FormGroup({});
   uploadForm: FormGroup = new FormGroup({
     model: new FormControl(''),
   });
+  isParametersValid: boolean = false;
   private model: string = '';
   private static readonly SUPPORTED_MODELS = {
     'yolov8-testing': new SupportedModel(
       'yolov8-testing',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
       UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING,
-      'http://54.210.89.75:8888/download_yolo8_test_files'
+      'http://54.210.89.75:8888/download_yolo8_test_files',
+      [
+        new Parameter('confidenceThreshold', '', 'number'),
+        new Parameter('iouThreshold', '', 'number'),
+        new Parameter('resizeImageSize', '', 'number'),
+      ]
     ),
     'yolov8-training': new SupportedModel(
       'yolov8-training',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_TRAINING,
       UploadFileService.UPLOAD_LABEL_FOR_OD_TRAINING,
-      'http://54.210.89.75:8888/download_yolo8_model_files'
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('namesOfClasses', '', 'text'),
+        new Parameter('yoloModel', '', 'text'),
+        new Parameter('batch', '', 'number'),
+        new Parameter('epochs', '', 'number'),
+        new Parameter('patience', '', 'number'),
+        new Parameter('learningRateLr0', '', 'number'),
+        new Parameter('learningRateLrf', '', 'number'),
+        new Parameter('resizeImageSize', '', 'number'),
+      ]
     ),
     'yolov8-detecting': new SupportedModel(
       'yolov8-detecting',
       'xxx',
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files'
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('xxx1', '', 'number'),
+        new Parameter('xxx2', '', 'number'),
+        new Parameter('xxx3', '', 'number'),
+      ]
     ),
   };
 
@@ -82,43 +124,43 @@ export class ModelExampleFormComponent implements OnInit {
         break;
       }
     }
+
+    var isValid = true;
+    for (let index = 0; index < this.selectedModel.parameters.length; index++) {
+      const element = this.selectedModel.parameters[index];
+      this.parametersForm.addControl(element.name, new FormControl(''));
+      isValid =
+        isValid && this.selectedModel.parameters[index].defaultValue != '';
+    }
+    this.isParametersValid = isValid;
+  }
+
+  parameterCheck() {
+    this.isParametersValid = this.parametersForm.valid;
   }
 
   runCb() {
     if (this.model === 'yolov8-testing') {
-      this.modelService.yolo8Test('1', '1', '1');
+      this.modelService.yolo8Test(
+        this.parametersForm.value.confidenceThreshold,
+        this.parametersForm.value.iouThreshold,
+        this.parametersForm.value.resizeImageSize
+      );
     } else if (this.model === 'yolov8-training') {
       this.modelService.yolo8Train(
-        'cat',
-        'yolov8s',
-        100,
-        1,
-        100,
-        0.01,
-        0.01,
-        640
+        this.parametersForm.value.namesOfClasses,
+        this.parametersForm.value.yoloModel,
+        this.parametersForm.value.batch,
+        this.parametersForm.value.epochs,
+        this.parametersForm.value.patience,
+        this.parametersForm.value.learningRateLr0,
+        this.parametersForm.value.learningRateLrf,
+        this.parametersForm.value.resizeImageSize
       );
     } else {
       console.error('fk the world');
     }
   }
 
-  downloadModel() {
-    if (this.model === 'yolov8-testing') {
-      this.modelService.yolo8Test('1', '1', '1');
-    } else if (this.model === 'yolov8-training') {
-      this.modelService.yolo8Train(
-        'cat',
-        'yolov8s',
-        100,
-        1,
-        100,
-        0.01,
-        0.01,
-        640
-      );
-    } else {
-      console.error('fk the world');
-    }
-  }
+  downloadModel() {}
 }

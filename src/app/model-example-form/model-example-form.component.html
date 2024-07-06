@@ -55,19 +55,41 @@
 </div>
 
 <div class="container-fluid card border-light shadow-sm mb-5">
-  <div class="row">
-    <div class="col-12 my-3">
-      <h4 class="form-label">Run Example</h4>
-    </div>
-    <div class="col-12">
-      <div class="d-grid">
-        <button class="btn btn-primary" (click)="runCb()">Run</button>
+  <div class="col-12 my-3">
+    <h4 class="form-label">Run Example</h4>
+  </div>
+  <form
+    class="row g-3 was-validated justify-content-end"
+    [formGroup]="parametersForm"
+    (change)="parameterCheck()"
+  >
+    <div class="col-12" *ngFor="let param of selectedModel.parameters">
+      <div class="input-group">
+        <span class="input-group-text" id="inputGroup-sizing-default">{{
+          param.name
+        }}</span>
+        <input
+          [formControlName]="param.name"
+          [type]="param.type"
+          class="form-control"
+          aria-describedby="inputGroup-sizing-default"
+          [value]="param.defaultValue"
+          required
+        />
       </div>
     </div>
-  </div>
-</div>
-
-<div class="container-fluid card border-light shadow-sm mb-5">
+    <div class="col-12 col-md-2 col-xl-1">
+      <div class="d-grid">
+        <button
+          class="btn btn-primary"
+          [disabled]="!isParametersValid"
+          (click)="runCb()"
+        >
+          Run
+        </button>
+      </div>
+    </div>
+  </form>
   <div class="row">
     <div class="col-12 my-3">
       <h4 class="form-label">Download Link</h4>
