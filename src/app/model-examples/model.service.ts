@@ -8,6 +8,15 @@ import { Subject } from 'rxjs';
 export class ModelService {
   static readonly YOLO8_TEST = 'http://54.210.89.75:8888/yolo8_test';
   static readonly YOLO8_TRAIN = 'http://54.210.89.75:8888/yolo8_train';
+  static readonly YOLO8_DETECT = 'http://54.210.89.75:8888/yolo8_detect';
+  static readonly YOLO3_TRAIN = 'http://54.210.89.75:8888/yolo3_tiny_train';
+  static readonly YOLO3_TEST = 'http://54.210.89.75:8888/yolo3_tiny_test';
+  static readonly QAI_HUB_TEST = 'http://54.210.89.75:8888/qai_hub_test';
+  static readonly QAI_HUB_DETECT = 'http://54.210.89.75:8888/qai_hub_detect';
+  static readonly CLEAR_TRAIN_IMAGE = 'http://54.210.89.75:8888/clear_folder_for_od_model_training';
+  static readonly CLEAR_test_IMAGE = 'http://54.210.89.75:8888/clear_folder_for_od_model_training';
+  static readonly CLEAR_DETECT_IMAGE = 'http://54.210.89.75:8888/clear_folder_for_od_model_training';
+  
   statusObserver: Subject<boolean> = new Subject();
 
   constructor(private readonly http: HttpClient) {}
@@ -102,11 +111,217 @@ export class ModelService {
       });
   }
 
-  yolo8Detecting() {
+  yolo8Detecting(
+    confidence_threshold: number,
+    iou_threshold: number,
+    resize_image_size: number,
+  ) {
+    const data = JSON.stringify({
+      confidence_threshold: confidence_threshold,
+      iou_threshold: iou_threshold,
+      resize_image_size: resize_image_size,
+    });
+    this.http
+      .post(ModelService.YOLO8_DETECT, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  yolov3Training(
+    namesOfClasses: string,
+    learningRate: number,
+    batchSize: number,
+    maxBatches: number,
+    resizeImageSize: number,
+  ) {
+    const data = JSON.stringify({
+      names_of_classes: namesOfClasses,
+      learning_rate: learningRate,
+      batch_size: batchSize,
+      max_batches: maxBatches,
+      resize_image_size: resizeImageSize,
+    });
+    console.log(data);
+    this.http
+      .post(ModelService.YOLO3_TRAIN, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  yolov3Testing() {
     const data = JSON.stringify({
     });
     this.http
-      .post(ModelService.YOLO8_TRAIN, data, {
+      .post(ModelService.YOLO3_TEST, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  qaiHubTesting(
+    confidenceThreshold: number,
+    iouThreshold: number,
+    resizeImageSize: number,
+    numClasses: number,
+    deviceName: string,
+  ) {
+    const data = JSON.stringify({
+      confidence_threshold: confidenceThreshold,
+      iou_threshold: iouThreshold,
+      resize_image_size: resizeImageSize,
+      num_classes: numClasses,
+      device_name: deviceName,
+    });
+    console.log(data);
+    this.http
+      .post(ModelService.QAI_HUB_TEST, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  qaiHubDetecting(
+    confidenceThreshold: number,
+    iouThreshold: number,
+    resizeImageSize: number,
+    deviceName: string,
+  ) {
+    const data = JSON.stringify({
+      confidence_threshold: confidenceThreshold,
+      iou_threshold: iouThreshold,
+      resize_image_size: resizeImageSize,
+      device_name: deviceName,
+    });
+    console.log(data);
+    this.http
+      .post(ModelService.QAI_HUB_DETECT, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  clearImage() {
+    const data = JSON.stringify({
+    });
+    this.http
+      .post(ModelService.CLEAR_TRAIN_IMAGE, data, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'application/json',

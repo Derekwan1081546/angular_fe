@@ -47,7 +47,7 @@ export class ModelExamplePageComponent {
         'This is yolo3 tiny training example for private usage. ' +
         'Click and follow the instruction to run the example.' +
         'abc',
-      model: 'yolo3-tiny-training',
+      model: 'yolov3tiny-training',
     },
     {
       title: 'Yolo3 Tiny Testing',
@@ -55,7 +55,23 @@ export class ModelExamplePageComponent {
         'This is yolo3 tiny testing example for private usage. ' +
         'Click and follow the instruction to run the example.' +
         'abc',
-      model: 'yolo3-tiny-testing',
+      model: 'yolov3tiny-testing',
+    },
+    {
+      title: 'Qai-Hub Testing',
+      description:
+        'This is  Qai-Hub Testing example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'qai-Hub-testing',
+    },
+    {
+      title: 'Qai-Hub Detecting',
+      description:
+        'This is Qai-Hub Detecting example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'qai-Hub-detecting',
     },
   ];
 }

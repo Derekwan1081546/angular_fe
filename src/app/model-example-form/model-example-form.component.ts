@@ -89,13 +89,58 @@ export class ModelExampleFormComponent implements OnInit {
     ),
     'yolov8-detecting': new SupportedModel(
       'yolov8-detecting',
-      'xxx',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
       'xxx',
       'http://54.210.89.75:8888/download_yolo8_model_files',
       [
-        new Parameter('xxx1', '', 'number'),
-        new Parameter('xxx2', '', 'number'),
-        new Parameter('xxx3', '', 'number'),
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'yolov3tiny-training': new SupportedModel(
+      'yolov3tiny-training',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_TRAINING,
+      UploadFileService.UPLOAD_LABEL_FOR_OD_TRAINING,
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('names_of_classes', '', 'text'),
+        new Parameter('learning_rate', '', 'number'),
+        new Parameter('batch_size', '', 'number'),
+        new Parameter('max_batches', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'yolov3tiny-testing': new SupportedModel(
+      'yolov3tiny-testing',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
+      UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING,
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      []
+    ),
+    'qai-Hub-testing': new SupportedModel(
+      'qai-Hub-testing',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
+      UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING,
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+        new Parameter('num_classes', '', 'number'),
+        new Parameter('device_name', '', 'text'),
+      ]
+    ),
+    'qai-Hub-detecting': new SupportedModel(
+      'qai-Hub-detecting',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+        new Parameter('device_name', '', 'text'),
       ]
     ),
   };
@@ -104,6 +149,10 @@ export class ModelExampleFormComponent implements OnInit {
     ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-testing'],
     ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-training'],
     ModelExampleFormComponent.SUPPORTED_MODELS['yolov8-detecting'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['yolov3tiny-training'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['yolov3tiny-testing'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['qai-Hub-testing'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['qai-Hub-detecting'],
   ];
 
   selectedModel: SupportedModel = this.supportedModels[0];
@@ -157,10 +206,44 @@ export class ModelExampleFormComponent implements OnInit {
         this.parametersForm.value.learningRateLrf,
         this.parametersForm.value.resizeImageSize
       );
+    } else if (this.model === 'yolov8-detecting') {
+        this.modelService.yolo8Detecting(
+          this.parametersForm.value.confidence_threshold,
+          this.parametersForm.value.iou_threshold,
+          this.parametersForm.value.resize_image_size,
+        );
+    } else if (this.model === 'yolov3tiny-training') {
+      this.modelService.yolov3Training(
+        this.parametersForm.value.names_of_classes,
+        this.parametersForm.value.learning_rate,
+        this.parametersForm.value.batch_size,
+        this.parametersForm.value.max_batches,
+        this.parametersForm.value.resize_image_size,
+      );
+    } else if (this.model === 'yolov3tiny-testing') {
+      this.modelService.yolov3Testing();
+    } else if (this.model === 'qai-Hub-testing') {
+      this.modelService.qaiHubTesting(
+        this.parametersForm.value.confidence_threshold,
+        this.parametersForm.value.iou_threshold,
+        this.parametersForm.value.resize_image_size,
+        this.parametersForm.value.num_classes,
+        this.parametersForm.value.device_name,
+      );
+    } else if (this.model === 'qai-Hub-detecting') {
+      this.modelService.qaiHubDetecting(
+        this.parametersForm.value.confidence_threshold,
+        this.parametersForm.value.iou_threshold,
+        this.parametersForm.value.resize_image_size,
+        this.parametersForm.value.device_name,
+      );
     } else {
       console.error('fk the world');
     }
   }
-
+  
+  clearImage(){
+    this.modelService.clearImage();
+  }
   downloadModel() {}
 }

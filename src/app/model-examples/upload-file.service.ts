@@ -14,6 +14,8 @@ export class UploadFileService {
     'http://54.210.89.75:8888/upload_image_file_for_od_model_training';
   static readonly UPLOAD_LABEL_FOR_OD_TRAINING =
     'http://54.210.89.75:8888/upload_label_file_for_od_model_training';
+  static readonly UPLOAD_IMAGE_FOR_OD_DETECTING =
+    'http://54.210.89.75:8888/upload_image_file_for_od_model_detecting';
   statusObserver: Subject<boolean> = new Subject();
 
   constructor(private readonly http: HttpClient) {}
