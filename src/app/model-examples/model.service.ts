@@ -6,16 +6,16 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class ModelService {
-  static readonly YOLO8_TEST = 'http://54.210.89.75:8888/yolo8_test';
-  static readonly YOLO8_TRAIN = 'http://54.210.89.75:8888/yolo8_train';
-  static readonly YOLO8_DETECT = 'http://54.210.89.75:8888/yolo8_detect';
-  static readonly YOLO3_TRAIN = 'http://54.210.89.75:8888/yolo3_tiny_train';
-  static readonly YOLO3_TEST = 'http://54.210.89.75:8888/yolo3_tiny_test';
-  static readonly QAI_HUB_TEST = 'http://54.210.89.75:8888/qai_hub_test';
-  static readonly QAI_HUB_DETECT = 'http://54.210.89.75:8888/qai_hub_detect';
-  static readonly CLEAR_TRAIN_IMAGE = 'http://54.210.89.75:8888/clear_folder_for_od_model_training';
-  static readonly CLEAR_test_IMAGE = 'http://54.210.89.75:8888/clear_folder_for_od_model_training';
-  static readonly CLEAR_DETECT_IMAGE = 'http://54.210.89.75:8888/clear_folder_for_od_model_training';
+  static readonly YOLO8_TEST = 'http://100.27.155.124:8888/yolo8_test';
+  static readonly YOLO8_TRAIN = 'http://100.27.155.124:8888/yolo8_train';
+  static readonly YOLO8_DETECT = 'http://100.27.155.124:8888/yolo8_detect';
+  static readonly YOLO3_TRAIN = 'http://100.27.155.124:8888/yolo3_tiny_train';
+  static readonly YOLO3_TEST = 'http://100.27.155.124:8888/yolo3_tiny_test';
+  static readonly QAI_HUB_TEST = 'http://100.27.155.124:8888/qai_hub_test';
+  static readonly QAI_HUB_DETECT = 'http://100.27.155.124:8888/qai_hub_detect';
+  static readonly CLEAR_TRAIN_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_training';
+  static readonly CLEAR_test_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_training';
+  static readonly CLEAR_DETECT_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_training';
   
   statusObserver: Subject<boolean> = new Subject();
 

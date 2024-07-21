@@ -7,15 +7,15 @@ import { Subject } from 'rxjs';
 })
 export class UploadFileService {
   static readonly UPLOAD_IMAGE_FOR_OD_TESTING =
-    'http://54.210.89.75:8888/upload_image_file_for_od_model_testing';
+    'http://100.27.155.124:8888/upload_image_file_for_od_model_testing';
   static readonly UPLOAD_LABEL_FOR_OD_TESTING =
-    'http://54.210.89.75:8888/upload_label_file_for_od_model_testing';
+    'http://100.27.155.124:8888/upload_label_file_for_od_model_testing';
   static readonly UPLOAD_IMAGE_FOR_OD_TRAINING =
-    'http://54.210.89.75:8888/upload_image_file_for_od_model_training';
+    'http://100.27.155.124:8888/upload_image_file_for_od_model_training';
   static readonly UPLOAD_LABEL_FOR_OD_TRAINING =
-    'http://54.210.89.75:8888/upload_label_file_for_od_model_training';
+    'http://100.27.155.124:8888/upload_label_file_for_od_model_training';
   static readonly UPLOAD_IMAGE_FOR_OD_DETECTING =
-    'http://54.210.89.75:8888/upload_image_file_for_od_model_detecting';
+    'http://100.27.155.124:8888/upload_image_file_for_od_model_detecting';
   statusObserver: Subject<boolean> = new Subject();
 
   constructor(private readonly http: HttpClient) {}
