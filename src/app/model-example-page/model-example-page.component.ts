@@ -73,5 +73,53 @@ export class ModelExamplePageComponent {
         'abc',
       model: 'qai-Hub-detecting',
     },
+    {
+      title: 'lora-training',
+      description:
+        'This is lora-training example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'lora-training',
+    },
+    {
+      title: 'generate-image-with-no-lora',
+      description:
+        'This is generate-image-with-no-lora example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'generate-image-with-no-lora',
+    },
+    {
+      title: 'generate-image-with-existing-lora',
+      description:
+        'This is generate-image-with-existing-lora example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'generate-image-with-existing-lora',
+    },
+    {
+      title: 'generate-image-with-new-lora',
+      description:
+        'This is generate-image-with-new-lora example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'generate-image-with-new-lora',
+    },
+    {
+      title: 'auto-label',
+      description:
+        'This is auto-label example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'auto-label',
+    },
+    {
+      title: 'auto-pipeline-a',
+      description:
+        'This is auto-pipeline-a example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'auto-pipeline-a',
+    },
   ];
 }

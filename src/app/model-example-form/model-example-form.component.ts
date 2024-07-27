@@ -143,6 +143,77 @@ export class ModelExampleFormComponent implements OnInit {
         new Parameter('device_name', '', 'text'),
       ]
     ),
+    'lora-training': new SupportedModel(
+      'lora-training',
+      UploadFileService.UPLOAD_IMAGE_FOR_LORA_TRAINING,
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('id_prompt', '', 'text'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('max_train_steps', '', 'number'),
+        new Parameter('checkpointing_steps', '', 'number'),
+      ]
+    ),
+    'generate-image-with-no-lora': new SupportedModel(
+      'generate-image-with-no-lora',
+      'xxx',
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('prompt', '', 'text'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('image_number_for_each_prompt', '', 'number'),
+      ]
+    ),
+    'generate-image-with-existing-lora': new SupportedModel(
+      'generate-image-with-existing-lora',
+      'xxx',
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('prompt', '', 'text'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('image_number_for_each_prompt', '', 'number'),
+        new Parameter('lora', '', 'text'),
+      ]
+    ),
+    'generate-image-with-new-lora': new SupportedModel(
+      'generate-image-with-new-lora',
+      'xxx',
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('id_prompt', '', 'text'),
+        new Parameter('prompt', '', 'text'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('image_number_for_each_prompt', '', 'number'),
+        new Parameter('train_steps', '', 'number'),
+      ]
+    ),
+    'auto-label': new SupportedModel(
+      'auto-label',
+      UploadFileService.UPLOAD_IMAGE_FOR_AUTO_LABEL,
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('names_of_classes', '', 'text'),
+      ]
+    ),
+    'auto-pipeline-a': new SupportedModel(
+      'auto-pipeline-a',
+      UploadFileService.UPLOAD_IMAGE_FOR_AUTO_PIPELINE,
+      'xxx',
+      'http://54.210.89.75:8888/download_yolo8_model_files',
+      [
+        new Parameter('names_of_target_classes', '', 'text'),
+        new Parameter('id_prompt', '', 'text'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('max_train_steps', '', 'number'),
+        new Parameter('image_number_for_each_prompt', '', 'number'),
+        new Parameter('YOLO_model', '', 'text'),
+      ]
+    ),
   };
 
   supportedModels = [
@@ -153,6 +224,12 @@ export class ModelExampleFormComponent implements OnInit {
     ModelExampleFormComponent.SUPPORTED_MODELS['yolov3tiny-testing'],
     ModelExampleFormComponent.SUPPORTED_MODELS['qai-Hub-testing'],
     ModelExampleFormComponent.SUPPORTED_MODELS['qai-Hub-detecting'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['lora-training'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['generate-image-with-no-lora'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['generate-image-with-existing-lora'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['generate-image-with-new-lora'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['auto-label'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['auto-pipeline-a'],
   ];
 
   selectedModel: SupportedModel = this.supportedModels[0];
@@ -237,6 +314,48 @@ export class ModelExampleFormComponent implements OnInit {
         this.parametersForm.value.resize_image_size,
         this.parametersForm.value.device_name,
       );
+    } else if (this.model === 'lora-training') {
+      this.modelService.loraTraining(
+        this.parametersForm.value.id_prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.max_train_steps,
+        this.parametersForm.value.checkpointing_steps,
+      );
+    } else if (this.model === 'generate-image-with-no-lora') {
+      this.modelService.generateImageWithNoLora(
+        this.parametersForm.value.prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.image_number_for_each_prompt,
+      );
+    } else if (this.model === 'generate-image-with-existing-lora') {
+      this.modelService.generateImageWithExistingLora(
+        this.parametersForm.value.prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.image_number_for_each_prompt,
+        this.parametersForm.value.lora,
+      );
+    } else if (this.model === 'generate-image-with-new-lora') {
+      this.modelService.generateImageWithNewLora(
+        this.parametersForm.value.id_prompt,
+        this.parametersForm.value.prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.image_number_for_each_prompt,
+        this.parametersForm.value.train_steps,
+      );
+    } else if (this.model === 'auto-label') {
+      this.modelService.autoLabel(
+        this.parametersForm.value.names_of_classes
+      );
+    } else if (this.model === 'auto-pipeline-a') {
+      this.modelService.autoPipelinea(
+        this.parametersForm.value.names_of_target_classes,
+        this.parametersForm.value.id_prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.max_train_steps,
+        this.parametersForm.value.image_number_for_each_prompt,
+        this.parametersForm.value.YOLO_model,
+      );
+      
     } else {
       console.error('fk the world');
     }
@@ -245,5 +364,7 @@ export class ModelExampleFormComponent implements OnInit {
   clearImage(){
     this.modelService.clearImage();
   }
-  downloadModel() {}
+  downloadModel(download_url:string) {
+    this.modelService.download_result(download_url);
+  }
 }
