@@ -64,7 +64,7 @@ export class ModelExampleFormComponent implements OnInit {
       'yolov8-testing',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
       UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING,
-      'http://54.210.89.75:8888/download_yolo8_test_files',
+      'http://100.27.155.124:8888/download_yolo8_test_files',
       [
         new Parameter('confidenceThreshold', '', 'number'),
         new Parameter('iouThreshold', '', 'number'),
@@ -75,7 +75,7 @@ export class ModelExampleFormComponent implements OnInit {
       'yolov8-training',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_TRAINING,
       UploadFileService.UPLOAD_LABEL_FOR_OD_TRAINING,
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_yolo8_model_files',
       [
         new Parameter('namesOfClasses', '', 'text'),
         new Parameter('yoloModel', '', 'text'),
@@ -91,7 +91,7 @@ export class ModelExampleFormComponent implements OnInit {
       'yolov8-detecting',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
       [
         new Parameter('confidence_threshold', '', 'number'),
         new Parameter('iou_threshold', '', 'number'),
@@ -102,7 +102,7 @@ export class ModelExampleFormComponent implements OnInit {
       'yolov3tiny-training',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_TRAINING,
       UploadFileService.UPLOAD_LABEL_FOR_OD_TRAINING,
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_yolo3_tiny_model_files',
       [
         new Parameter('names_of_classes', '', 'text'),
         new Parameter('learning_rate', '', 'number'),
@@ -115,14 +115,14 @@ export class ModelExampleFormComponent implements OnInit {
       'yolov3tiny-testing',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
       UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING,
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_yolo3_tiny_test_files',
       []
     ),
     'qai-Hub-testing': new SupportedModel(
       'qai-Hub-testing',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
       UploadFileService.UPLOAD_LABEL_FOR_OD_TESTING,
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_qai_hub_test_files',
       [
         new Parameter('confidence_threshold', '', 'number'),
         new Parameter('iou_threshold', '', 'number'),
@@ -135,7 +135,7 @@ export class ModelExampleFormComponent implements OnInit {
       'qai-Hub-detecting',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_qai_hub_detect_files',
       [
         new Parameter('confidence_threshold', '', 'number'),
         new Parameter('iou_threshold', '', 'number'),
@@ -147,7 +147,7 @@ export class ModelExampleFormComponent implements OnInit {
       'lora-training',
       UploadFileService.UPLOAD_IMAGE_FOR_LORA_TRAINING,
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_lora_files',
       [
         new Parameter('id_prompt', '', 'text'),
         new Parameter('resolution', '', 'number'),
@@ -159,7 +159,7 @@ export class ModelExampleFormComponent implements OnInit {
       'generate-image-with-no-lora',
       'xxx',
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_generate_images_with_no_lora',
       [
         new Parameter('prompt', '', 'text'),
         new Parameter('resolution', '', 'number'),
@@ -170,7 +170,7 @@ export class ModelExampleFormComponent implements OnInit {
       'generate-image-with-existing-lora',
       'xxx',
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_generate_images_with_existing_lora',
       [
         new Parameter('prompt', '', 'text'),
         new Parameter('resolution', '', 'number'),
@@ -182,7 +182,7 @@ export class ModelExampleFormComponent implements OnInit {
       'generate-image-with-new-lora',
       'xxx',
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_generate_images_with_new_lora',
       [
         new Parameter('id_prompt', '', 'text'),
         new Parameter('prompt', '', 'text'),
@@ -195,7 +195,7 @@ export class ModelExampleFormComponent implements OnInit {
       'auto-label',
       UploadFileService.UPLOAD_IMAGE_FOR_AUTO_LABEL,
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_auto_label_data',
       [
         new Parameter('names_of_classes', '', 'text'),
       ]
@@ -204,7 +204,7 @@ export class ModelExampleFormComponent implements OnInit {
       'auto-pipeline-a',
       UploadFileService.UPLOAD_IMAGE_FOR_AUTO_PIPELINE,
       'xxx',
-      'http://54.210.89.75:8888/download_yolo8_model_files',
+      'http://100.27.155.124:8888/download_auto_pipeline_files',
       [
         new Parameter('names_of_target_classes', '', 'text'),
         new Parameter('id_prompt', '', 'text'),
