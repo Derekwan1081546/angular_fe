@@ -6,7 +6,7 @@ import { Observable, Subject, throwIfEmpty } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private static readonly SIGNIN = 'http://107.22.189.28/api/v2/auth/signin';
+  private static readonly SIGNIN = 'http://54.236.230.38:8080/api/v2/auth/signin';
 
   private username: string = '';
   private valid: boolean = false;
