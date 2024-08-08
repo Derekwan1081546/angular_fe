@@ -121,5 +121,61 @@ export class ModelExamplePageComponent {
         'abc',
       model: 'auto-pipeline-a',
     },
+    {
+      title: 'bbox feature visualiztion for different datasets',
+      description:
+        'This is bbox feature visualiztion for different datasets example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'bbox-feature-visualiztion-for-different-datasets',
+    },
+    {
+      title: 'bbox feature visualiztion for od train data and od test data',
+      description:
+        'This is bbox feature visualiztion for od train data and od test data example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'bbox-feature-visualiztion-for-od-train-data-and-od-test-data',
+    },
+    {
+      title: 'image feature visualiztion for different datasets',
+      description:
+        'This is image feature visualiztion for different datasets example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'image-feature-visualiztion-for-different-datasets',
+    },
+    {
+      title: 'image feature visualiztion for od train data and od test data',
+      description:
+        'This is image feature visualiztion for od train data and od test data example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'image-feature-visualiztion-for-od-train-data-and-od-test-data',
+    },
+    {
+      title: 'bbox feature visualiztion for lora train data and ai generated data',
+      description:
+        'This is bbox feature visualiztion for lora train data and ai generated data example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+    },
+    {
+      title: 'image feature visualiztion for lora train data and ai generated data',
+      description:
+        'This is image feature visualiztion for lora train data and ai generated data example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+    },
+    {
+      title: 'feature visualiztion for lora train data and ai generated data',
+      description:
+        'This is feature visualiztion for lora train data and ai generated_data example for private usage. ' +
+        'Click and follow the instruction to run the example.' +
+        'abc',
+      model: 'feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+    },
   ];
 }

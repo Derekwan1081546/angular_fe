@@ -214,6 +214,83 @@ export class ModelExampleFormComponent implements OnInit {
         new Parameter('YOLO_model', '', 'text'),
       ]
     ),
+    'bbox-feature-visualiztion-for-different-datasets': new SupportedModel(
+      'bbox-feature-visualiztion-for-different-datasets',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'bbox-feature-visualiztion-for-od-train-data-and-od-test-data': new SupportedModel(
+      'bbox-feature-visualiztion-for-od-train-data-and-od-test-data',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'image-feature-visualiztion-for-different-datasets': new SupportedModel(
+      'image-feature-visualiztion-for-different-datasets',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'image-feature-visualiztion-for-od-train-data-and-od-test-data': new SupportedModel(
+      'image-feature-visualiztion-for-od-train-data-and-od-test-data',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data': new SupportedModel(
+      'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data': new SupportedModel(
+      'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
+    'feature-visualiztion-for-lora-train-data-and-ai-generated-data': new SupportedModel(
+      'feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
+      'xxx',
+      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      [
+        new Parameter('confidence_threshold', '', 'number'),
+        new Parameter('iou_threshold', '', 'number'),
+        new Parameter('resize_image_size', '', 'number'),
+      ]
+    ),
   };
 
   supportedModels = [
@@ -230,6 +307,13 @@ export class ModelExampleFormComponent implements OnInit {
     ModelExampleFormComponent.SUPPORTED_MODELS['generate-image-with-new-lora'],
     ModelExampleFormComponent.SUPPORTED_MODELS['auto-label'],
     ModelExampleFormComponent.SUPPORTED_MODELS['auto-pipeline-a'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['bbox-feature-visualiztion-for-different-datasets'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['bbox-feature-visualiztion-for-od-train-data-and-od-test-data'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['image-feature-visualiztion-for-different-datasets'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['image-feature-visualiztion-for-od-train-data-and-od-test-data'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['image-feature-visualiztion-for-lora-train-data-and-ai-generated-data'],
+    ModelExampleFormComponent.SUPPORTED_MODELS['feature-visualiztion-for-lora-train-data-and-ai-generated-data'],
   ];
 
   selectedModel: SupportedModel = this.supportedModels[0];
