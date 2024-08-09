@@ -262,33 +262,44 @@ export class ModelExampleFormComponent implements OnInit {
       'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
       'xxx',
-      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      'http://100.27.155.124:8888/download_bbox_feature_visualiztion_for_lora_train_data_and_ai_generated_data',
       [
-        new Parameter('confidence_threshold', '', 'number'),
-        new Parameter('iou_threshold', '', 'number'),
-        new Parameter('resize_image_size', '', 'number'),
+        new Parameter('id_prompt', '', 'string'),
+        new Parameter('prompt', '', 'string'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('image_number_for_each_prompt', '', 'number'),
+        new Parameter('max_train_steps', '', 'number'),
+        new Parameter('checkpointing_steps', '', 'number'),
+        new Parameter('names_of_classes', '', 'string'),
       ]
     ),
     'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data': new SupportedModel(
       'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
       'xxx',
-      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      'http://100.27.155.124:8888/download_image_feature_visualiztion_for_lora_train_data_and_ai_generated_data',
       [
-        new Parameter('confidence_threshold', '', 'number'),
-        new Parameter('iou_threshold', '', 'number'),
-        new Parameter('resize_image_size', '', 'number'),
+        new Parameter('id_prompt', '', 'string'),
+        new Parameter('prompt', '', 'string'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('image_number_for_each_prompt', '', 'number'),
+        new Parameter('max_train_steps', '', 'number'),
+        new Parameter('checkpointing_steps', '', 'number'),
       ]
     ),
     'feature-visualiztion-for-lora-train-data-and-ai-generated-data': new SupportedModel(
       'feature-visualiztion-for-lora-train-data-and-ai-generated-data',
       UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
       'xxx',
-      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      'http://100.27.155.124:8888/download_auto_labels_for_visualization',
       [
-        new Parameter('confidence_threshold', '', 'number'),
-        new Parameter('iou_threshold', '', 'number'),
-        new Parameter('resize_image_size', '', 'number'),
+        new Parameter('id_prompt', '', 'string'),
+        new Parameter('prompt', '', 'string'),
+        new Parameter('resolution', '', 'number'),
+        new Parameter('image_number_for_each_prompt', '', 'number'),
+        new Parameter('max_train_steps', '', 'number'),
+        new Parameter('checkpointing_steps', '', 'number'),
+        new Parameter('names_of_classes', '', 'string'),
       ]
     ),
   };
@@ -439,7 +450,35 @@ export class ModelExampleFormComponent implements OnInit {
         this.parametersForm.value.image_number_for_each_prompt,
         this.parametersForm.value.YOLO_model,
       );
-      
+    } else if (this.model === 'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data') {
+      this.modelService.bboxFeatureVisualiztionForLoraTrain(
+        this.parametersForm.value.id_prompt,
+        this.parametersForm.value.prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.image_number_for_each_prompt,
+        this.parametersForm.value.max_train_steps,
+        this.parametersForm.value.checkpointing_steps,
+        this.parametersForm.value.names_of_classes,
+      );
+    } else if (this.model === 'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data') {
+      this.modelService.imageFeatureVisualiztionForLoraTrain(
+        this.parametersForm.value.id_prompt,
+        this.parametersForm.value.prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.image_number_for_each_prompt,
+        this.parametersForm.value.max_train_steps,
+        this.parametersForm.value.checkpointing_steps,
+      );
+    } else if (this.model === 'feature-visualiztion-for-lora-train-data-and-ai-generated-data') {
+      this.modelService.FeatureVisualiztionForLoraTrain(
+        this.parametersForm.value.id_prompt,
+        this.parametersForm.value.prompt,
+        this.parametersForm.value.resolution,
+        this.parametersForm.value.image_number_for_each_prompt,
+        this.parametersForm.value.max_train_steps,
+        this.parametersForm.value.checkpointing_steps,
+        this.parametersForm.value.names_of_classes,
+      );
     } else {
       console.error('fk the world');
     }

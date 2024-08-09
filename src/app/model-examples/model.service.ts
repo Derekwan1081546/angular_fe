@@ -19,12 +19,15 @@ export class ModelService {
   static readonly GENERATE_IMAGES_WITH_NEW_LORA = 'http://100.27.155.124:8888/generate_images_with_new_lora';
   static readonly AUTO_LABEL = 'http://100.27.155.124:8888/auto_label';
   static readonly AUTO_PIPELINE_A = 'http://100.27.155.124:8888//auto_pipeline_a';
+  static readonly BBOX_FEATURE_VISUALIZATION_FOR_LORA_TRAIN = 'http://100.27.155.124:8888//bbox_feature_visualiztion_for_lora_train_data_and_ai_generated_data';
+  static readonly IMAGE_FEATURE_VISUALIZATION_FOR_LORA_TRAIN = 'http://100.27.155.124:8888//image_feature_visualiztion_for_lora_train_data_and_ai_generated_data';
   static readonly CLEAR_TRAIN_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_training';
   static readonly CLEAR_TEST_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_testing';
   static readonly CLEAR_DETECT_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_detecting';
   static readonly CLEAR_AUTO_PIPELINE_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_auto_pipeline';
   static readonly CLEAR_BBOX_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_bbox_feature_visualization';
   static readonly CLEAR_IMAGE_FEATURE_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_image_feature_visualization';
+  static readonly CLEAR_NEW_LORA_GENERATE_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_generate_images_with_new_lora';
   
   statusObserver: Subject<boolean> = new Subject();
 
@@ -593,6 +596,315 @@ export class ModelService {
           this.statusObserver.next(false);
         },
       });
+  }
+
+  async bboxFeatureVisualiztionForLoraTrain(
+    id_prompt: string,
+    prompt: string,
+    resolution: number,
+    image_number_for_each_prompt: number,
+    max_train_steps: number,
+    checkpointing_steps: number,
+    names_of_classes: string,
+  ) {
+    try {
+      const response = await this.http
+        .post(ModelService.CLEAR_NEW_LORA_GENERATE_IMAGE, {}, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+          },
+          responseType: 'text',
+          reportProgress: true,
+          observe: 'response', // 'response' returns the entire HttpResponse
+        })
+        .toPromise();
+  
+      if (response && response.ok) {
+        console.warn(response);
+        this.statusObserver.next(true);
+      } else {
+        console.error(response);
+        this.statusObserver.next(false);
+      }
+    } catch (error) {
+      console.error('HTTP request failed:', error);
+      this.statusObserver.next(false);
+    }
+    var train_steps = Number(checkpointing_steps);
+    while (train_steps <= max_train_steps){
+      const data = JSON.stringify({
+        id_prompt: id_prompt,
+        prompt: prompt,
+        resolution: resolution,
+        image_number_for_each_prompt: image_number_for_each_prompt,
+        train_steps: train_steps,
+      });
+      try {
+        const response = await this.http
+          .post(ModelService.GENERATE_IMAGES_WITH_NEW_LORA, data, {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'content-type': 'application/json',
+            },
+            responseType: 'text',
+            reportProgress: true,
+            observe: 'response', // 'response' returns the entire HttpResponse
+          })
+          .toPromise();
+    
+        if (response && response.ok) {
+          console.warn(response);
+          this.statusObserver.next(true);
+        } else {
+          console.error(response);
+          this.statusObserver.next(false);
+        }
+      } catch (error) {
+        console.error('HTTP request failed:', error);
+        this.statusObserver.next(false);
+      }
+      train_steps = train_steps + Number(checkpointing_steps);
+    }
+    const data = JSON.stringify({
+      names_of_classes: names_of_classes,
+    });
+    try {
+      const response = await this.http
+        .post(ModelService.BBOX_FEATURE_VISUALIZATION_FOR_LORA_TRAIN, data, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+          },
+          responseType: 'text',
+          reportProgress: true,
+          observe: 'response', // 'response' returns the entire HttpResponse
+        })
+        .toPromise();
+  
+      if (response && response.ok) {
+        console.warn(response);
+        this.statusObserver.next(true);
+        alert('task complete');
+      } else {
+        console.error(response);
+        this.statusObserver.next(false);
+      }
+    } catch (error) {
+      console.error('HTTP request failed:', error);
+      this.statusObserver.next(false);
+    }
+  }
+
+  async imageFeatureVisualiztionForLoraTrain(
+    id_prompt: string,
+    prompt: string,
+    resolution: number,
+    image_number_for_each_prompt: number,
+    max_train_steps: number,
+    checkpointing_steps: number,
+  ) {
+    try {
+      const response = await this.http
+        .post(ModelService.CLEAR_NEW_LORA_GENERATE_IMAGE, {}, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+          },
+          responseType: 'text',
+          reportProgress: true,
+          observe: 'response', // 'response' returns the entire HttpResponse
+        })
+        .toPromise();
+  
+      if (response && response.ok) {
+        console.warn(response);
+        this.statusObserver.next(true);
+      } else {
+        console.error(response);
+        this.statusObserver.next(false);
+      }
+    } catch (error) {
+      console.error('HTTP request failed:', error);
+      this.statusObserver.next(false);
+    }
+    var train_steps = Number(checkpointing_steps);
+    while (train_steps <= max_train_steps){
+      const data = JSON.stringify({
+        id_prompt: id_prompt,
+        prompt: prompt,
+        resolution: resolution,
+        image_number_for_each_prompt: image_number_for_each_prompt,
+        train_steps: train_steps,
+      });
+      try {
+        const response = await this.http
+          .post(ModelService.GENERATE_IMAGES_WITH_NEW_LORA, data, {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'content-type': 'application/json',
+            },
+            responseType: 'text',
+            reportProgress: true,
+            observe: 'response', // 'response' returns the entire HttpResponse
+          })
+          .toPromise();
+    
+        if (response && response.ok) {
+          console.warn(response);
+          this.statusObserver.next(true);
+        } else {
+          console.error(response);
+          this.statusObserver.next(false);
+        }
+      } catch (error) {
+        console.error('HTTP request failed:', error);
+        this.statusObserver.next(false);
+      }
+      train_steps = train_steps + Number(checkpointing_steps);
+    }
+    try {
+      const response = await this.http
+        .post(ModelService.IMAGE_FEATURE_VISUALIZATION_FOR_LORA_TRAIN, {}, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+          },
+          responseType: 'text',
+          reportProgress: true,
+          observe: 'response', // 'response' returns the entire HttpResponse
+        })
+        .toPromise();
+  
+      if (response && response.ok) {
+        console.warn(response);
+        this.statusObserver.next(true);
+        alert('task complete');
+      } else {
+        console.error(response);
+        this.statusObserver.next(false);
+      }
+    } catch (error) {
+      console.error('HTTP request failed:', error);
+      this.statusObserver.next(false);
+    }
+  }
+
+  async FeatureVisualiztionForLoraTrain(
+    id_prompt: string,
+    prompt: string,
+    resolution: number,
+    image_number_for_each_prompt: number,
+    max_train_steps: number,
+    checkpointing_steps: number,
+    names_of_classes: string,
+  ) {
+    try {
+      const response = await this.http
+        .post(ModelService.CLEAR_NEW_LORA_GENERATE_IMAGE, {}, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+          },
+          responseType: 'text',
+          reportProgress: true,
+          observe: 'response', // 'response' returns the entire HttpResponse
+        })
+        .toPromise();
+  
+      if (response && response.ok) {
+        console.warn(response);
+        this.statusObserver.next(true);
+      } else {
+        console.error(response);
+        this.statusObserver.next(false);
+      }
+    } catch (error) {
+      console.error('HTTP request failed:', error);
+      this.statusObserver.next(false);
+    }
+    var train_steps = Number(checkpointing_steps);
+    while (train_steps <= max_train_steps){
+      const data = JSON.stringify({
+        id_prompt: id_prompt,
+        prompt: prompt,
+        resolution: resolution,
+        image_number_for_each_prompt: image_number_for_each_prompt,
+        train_steps: train_steps,
+      });
+      try {
+        const response = await this.http
+          .post(ModelService.GENERATE_IMAGES_WITH_NEW_LORA, data, {
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'content-type': 'application/json',
+            },
+            responseType: 'text',
+            reportProgress: true,
+            observe: 'response', // 'response' returns the entire HttpResponse
+          })
+          .toPromise();
+    
+        if (response && response.ok) {
+          console.warn(response);
+          this.statusObserver.next(true);
+        } else {
+          console.error(response);
+          this.statusObserver.next(false);
+        }
+      } catch (error) {
+        console.error('HTTP request failed:', error);
+        this.statusObserver.next(false);
+      }
+      train_steps = train_steps + Number(checkpointing_steps);
+    }
+    const data = JSON.stringify({
+      names_of_classes: names_of_classes,
+    });
+    try {
+      const response = await this.http
+        .post(ModelService.IMAGE_FEATURE_VISUALIZATION_FOR_LORA_TRAIN, {}, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+          },
+          responseType: 'text',
+          reportProgress: true,
+          observe: 'response', // 'response' returns the entire HttpResponse
+        })
+        .toPromise();
+  
+      if (response && response.ok) {
+        console.warn(response);
+        this.statusObserver.next(true);
+      } else {
+        console.error(response);
+        this.statusObserver.next(false);
+      }
+      const response_bbox = await this.http
+        .post(ModelService.BBOX_FEATURE_VISUALIZATION_FOR_LORA_TRAIN, data, {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'content-type': 'application/json',
+          },
+          responseType: 'text',
+          reportProgress: true,
+          observe: 'response', // 'response' returns the entire HttpResponse
+        })
+        .toPromise();
+  
+      if (response_bbox && response_bbox.ok) {
+        console.warn(response_bbox);
+        this.statusObserver.next(true);
+        alert('task complete');
+      } else {
+        console.error(response_bbox);
+        this.statusObserver.next(false);
+      }
+    } catch (error) {
+      console.error('HTTP request failed:', error);
+      this.statusObserver.next(false);
+    }
   }
 
   clearImage() {
