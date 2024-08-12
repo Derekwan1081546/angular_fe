@@ -22,18 +22,27 @@ export class UploadFileService {
     'http://100.27.155.124:8888/upload_file_for_auto_label';
   static readonly UPLOAD_IMAGE_FOR_AUTO_PIPELINE =
     'http://100.27.155.124:8888/upload_image_file_for_auto_pipeline';
-        
+
   statusObserver: Subject<boolean> = new Subject();
 
   constructor(private readonly http: HttpClient) {}
 
-  uploadOdTesting(files: FileList, url: string) {
+  uploadOdTesting(
+    files: FileList,
+    url: string,
+    extraParams: Map<string, string> = new Map<string, string>([])
+  ) {
     const formData = new FormData();
     formData.append('file', files[0]);
     for (let index = 0; index < files.length; index++) {
       const element = files[index];
       formData.append('file-' + index, element);
     }
+
+    extraParams.forEach((value, key) => {
+      formData.append(key, value);
+    });
+
     this.http
       .post(url, formData, {
         headers: {

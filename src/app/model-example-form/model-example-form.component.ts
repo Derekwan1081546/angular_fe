@@ -29,7 +29,9 @@ class SupportedModel {
   uploadLabelUrl: string = '';
   downloadUrl: string = '';
   parameters: Parameter[] = [];
-  extra_upload_urls: Map<string, string>;
+  extraUploadUrls: Map<string, string>;
+  extraUploadParams: string[] = [];
+  runExampleSection: boolean = true;
 
   constructor(
     model: string,
@@ -37,14 +39,18 @@ class SupportedModel {
     uploadLabelUrl: string,
     downloadUrl: string,
     parameters: Parameter[],
-    extra_upload_urls: Map<string, string> = new Map<string, string>([])
+    extraUploadUrls: Map<string, string> = new Map<string, string>([]),
+    extraUploadParams: string[] = [],
+    runExampleSection: boolean = true
   ) {
     this.model = model;
     this.uploadImgUrl = uploadImgUrl;
     this.uploadLabelUrl = uploadLabelUrl;
     this.downloadUrl = downloadUrl;
     this.parameters = parameters;
-    this.extra_upload_urls = extra_upload_urls;
+    this.extraUploadUrls = extraUploadUrls;
+    this.extraUploadParams = extraUploadParams;
+    this.runExampleSection = runExampleSection;
   }
 }
 
@@ -61,8 +67,8 @@ export class ModelExampleFormComponent implements OnInit {
     model: new FormControl(''),
   });
   isParametersValid: boolean = false;
-  extra_upload_urls: Map<string, string> = new Map<string, string>([]);
-  extra_upload_url_keys: string[] = [];
+  extraUploadUrls: Map<string, string> = new Map<string, string>([]);
+  extraUploadUrlKeys: string[] = [];
   private model: string = '';
   private static readonly SUPPORTED_MODELS = {
     'yolov8-testing': new SupportedModel(
@@ -219,14 +225,19 @@ export class ModelExampleFormComponent implements OnInit {
     ),
     'bbox-feature-visualiztion-for-different-datasets': new SupportedModel(
       'bbox-feature-visualiztion-for-different-datasets',
-      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
-      'xxx',
+      '',
+      '',
       'http://100.27.155.124:8888/download_yolo8_detect_files',
       [
         new Parameter('confidence_threshold', '', 'number'),
         new Parameter('iou_threshold', '', 'number'),
         new Parameter('resize_image_size', '', 'number'),
-      ]
+      ],
+      new Map<string, string>([
+        ['Run', 'xxx url'],
+      ]),
+      ['dataset'],
+      false
     ),
     'bbox-feature-visualiztion-for-od-train-data-and-od-test-data':
       new SupportedModel(
@@ -260,14 +271,19 @@ export class ModelExampleFormComponent implements OnInit {
       ),
     'image-feature-visualiztion-for-different-datasets': new SupportedModel(
       'image-feature-visualiztion-for-different-datasets',
-      UploadFileService.UPLOAD_IMAGE_FOR_OD_DETECTING,
-      'xxx',
+      '',
+      '',
       'http://100.27.155.124:8888/download_yolo8_detect_files',
       [
         new Parameter('confidence_threshold', '', 'number'),
         new Parameter('iou_threshold', '', 'number'),
         new Parameter('resize_image_size', '', 'number'),
-      ]
+      ],
+      new Map<string, string>([
+        ['Run', 'xxx url'],
+      ]),
+      ['dataset'],
+      false
     ),
     'image-feature-visualiztion-for-od-train-data-and-od-test-data':
       new SupportedModel(
@@ -288,7 +304,7 @@ export class ModelExampleFormComponent implements OnInit {
           [
             'Upload Image: od model testing',
             UploadFileService.UPLOAD_IMAGE_FOR_OD_TESTING,
-          ]
+          ],
         ])
       ),
     'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data':
@@ -406,9 +422,9 @@ export class ModelExampleFormComponent implements OnInit {
         isValid && this.selectedModel.parameters[index].defaultValue != '';
     }
     this.isParametersValid = isValid;
-    this.extra_upload_urls = this.selectedModel.extra_upload_urls;
-    this.extra_upload_url_keys = Array.from(
-      this.selectedModel.extra_upload_urls.keys()
+    this.extraUploadUrls = this.selectedModel.extraUploadUrls;
+    this.extraUploadUrlKeys = Array.from(
+      this.selectedModel.extraUploadUrls.keys()
     );
   }
 

@@ -6,6 +6,7 @@ class Example {
   title: string = '';
   description: string = '';
   model: string = '';
+  form_type: string = '';
 }
 
 @Component({
@@ -24,6 +25,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'yolov8-testing',
+      form_type: 'default',
     },
     {
       title: 'Yolo V8 Training',
@@ -32,6 +34,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'yolov8-training',
+      form_type: 'default',
     },
     {
       title: 'Yolo V8 Detecting',
@@ -40,6 +43,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'yolov8-detecting',
+      form_type: 'default',
     },
     {
       title: 'Yolo3 Tiny Training',
@@ -48,6 +52,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'yolov3tiny-training',
+      form_type: 'default',
     },
     {
       title: 'Yolo3 Tiny Testing',
@@ -56,6 +61,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'yolov3tiny-testing',
+      form_type: 'default',
     },
     {
       title: 'Qai-Hub Testing',
@@ -64,6 +70,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'qai-Hub-testing',
+      form_type: 'default',
     },
     {
       title: 'Qai-Hub Detecting',
@@ -72,6 +79,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'qai-Hub-detecting',
+      form_type: 'default',
     },
     {
       title: 'lora-training',
@@ -80,6 +88,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'lora-training',
+      form_type: 'default',
     },
     {
       title: 'generate-image-with-no-lora',
@@ -88,6 +97,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'generate-image-with-no-lora',
+      form_type: 'default',
     },
     {
       title: 'generate-image-with-existing-lora',
@@ -96,6 +106,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'generate-image-with-existing-lora',
+      form_type: 'default',
     },
     {
       title: 'generate-image-with-new-lora',
@@ -104,6 +115,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'generate-image-with-new-lora',
+      form_type: 'default',
     },
     {
       title: 'auto-label',
@@ -112,6 +124,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'auto-label',
+      form_type: 'default',
     },
     {
       title: 'auto-pipeline-a',
@@ -120,6 +133,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'auto-pipeline-a',
+      form_type: 'default',
     },
     {
       title: 'bbox feature visualiztion for different datasets',
@@ -128,6 +142,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'bbox-feature-visualiztion-for-different-datasets',
+      form_type: 'default',
     },
     {
       title: 'bbox feature visualiztion for od train data and od test data',
@@ -136,6 +151,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'bbox-feature-visualiztion-for-od-train-data-and-od-test-data',
+      form_type: 'default',
     },
     {
       title: 'image feature visualiztion for different datasets',
@@ -144,6 +160,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'image-feature-visualiztion-for-different-datasets',
+      form_type: 'default',
     },
     {
       title: 'image feature visualiztion for od train data and od test data',
@@ -152,22 +169,29 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'image-feature-visualiztion-for-od-train-data-and-od-test-data',
+      form_type: 'default',
     },
     {
-      title: 'bbox feature visualiztion for lora train data and ai generated data',
+      title:
+        'bbox feature visualiztion for lora train data and ai generated data',
       description:
         'This is bbox feature visualiztion for lora train data and ai generated data example for private usage. ' +
         'Click and follow the instruction to run the example.' +
         'abc',
-      model: 'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      model:
+        'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      form_type: 'default',
     },
     {
-      title: 'image feature visualiztion for lora train data and ai generated data',
+      title:
+        'image feature visualiztion for lora train data and ai generated data',
       description:
         'This is image feature visualiztion for lora train data and ai generated data example for private usage. ' +
         'Click and follow the instruction to run the example.' +
         'abc',
-      model: 'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      model:
+        'image-feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      form_type: 'default',
     },
     {
       title: 'feature visualiztion for lora train data and ai generated data',
@@ -176,6 +200,7 @@ export class ModelExamplePageComponent {
         'Click and follow the instruction to run the example.' +
         'abc',
       model: 'feature-visualiztion-for-lora-train-data-and-ai-generated-data',
+      form_type: 'default',
     },
   ];
 }

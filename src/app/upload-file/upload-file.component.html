@@ -114,6 +114,24 @@
       </table>
     </div>
   </div>
+
+  <div *ngFor="let params of extraParameters">
+    <div class="col-12">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">{{
+          params
+        }}</span>
+        <input
+          [name]="params"
+          type="text"
+          class="form-control"
+          [accept]="accept"
+          (change)="onParamChange($event)"
+        />
+      </div>
+    </div>
+  </div>
+
   <div class="row" *ngIf="showingPageList.length == 0">
     <div class="col-12">
       <div class="input-group mb-3">

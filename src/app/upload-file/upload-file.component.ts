@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UploadFileService } from '../model-examples/upload-file.service';
 
 class FileInfo {
@@ -38,6 +38,8 @@ export class UploadFileComponent implements OnInit {
   @Input() maxPageSize: number = 4;
   @Input() title: string = '';
   @Input() url: string = '';
+  @Input() extraParameters: string[] = [];
+  extraParametersMap: Map<string, string> = new Map([]);
 
   constructor(private readonly service: UploadFileService) {}
 
@@ -112,6 +114,12 @@ export class UploadFileComponent implements OnInit {
     }
   }
 
+  onParamChange(event: Event) {
+    const element = event.target as HTMLInputElement;
+    this.extraParametersMap.set(element.name, element.value);
+    console.log(this.extraParametersMap);
+  }
+
   handleSelectedFiles(files: FileList) {
     this.files = files;
     this.fileInfoList = [];
@@ -151,6 +159,6 @@ export class UploadFileComponent implements OnInit {
       return;
     }
     this.uploading = true;
-    this.service.uploadOdTesting(this.files, this.url);
+    this.service.uploadOdTesting(this.files, this.url, this.extraParametersMap);
   }
 }
