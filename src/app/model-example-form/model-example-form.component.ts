@@ -93,8 +93,8 @@ export class ModelExampleFormComponent implements OnInit {
         new Parameter('batch', '', 'number'),
         new Parameter('epochs', '', 'number'),
         new Parameter('patience', '', 'number'),
-        new Parameter('learningRateLr0', '', 'number'),
-        new Parameter('learningRateLrf', '', 'number'),
+        new Parameter('learningRateLr0', '', 'text'),
+        new Parameter('learningRateLrf', '', 'text'),
         new Parameter('resizeImageSize', '', 'number'),
       ]
     ),
@@ -116,7 +116,7 @@ export class ModelExampleFormComponent implements OnInit {
       'http://100.27.155.124:8888/download_yolo3_tiny_model_files',
       [
         new Parameter('names_of_classes', '', 'text'),
-        new Parameter('learning_rate', '', 'number'),
+        new Parameter('learning_rate', '', 'text'),
         new Parameter('batch_size', '', 'number'),
         new Parameter('max_batches', '', 'number'),
         new Parameter('resize_image_size', '', 'number'),
@@ -228,11 +228,7 @@ export class ModelExampleFormComponent implements OnInit {
       '',
       '',
       'http://100.27.155.124:8888/download_yolo8_detect_files',
-      [
-        new Parameter('confidence_threshold', '', 'number'),
-        new Parameter('iou_threshold', '', 'number'),
-        new Parameter('resize_image_size', '', 'number'),
-      ],
+      [],
       new Map<string, string>([
         ['Run', 'xxx url'],
       ]),
@@ -245,11 +241,7 @@ export class ModelExampleFormComponent implements OnInit {
         '',
         '',
         'http://100.27.155.124:8888/download_yolo8_detect_files',
-        [
-          new Parameter('confidence_threshold', '', 'number'),
-          new Parameter('iou_threshold', '', 'number'),
-          new Parameter('resize_image_size', '', 'number'),
-        ],
+        [],
         new Map<string, string>([
           [
             'Upload Image: od model training',
@@ -274,11 +266,7 @@ export class ModelExampleFormComponent implements OnInit {
       '',
       '',
       'http://100.27.155.124:8888/download_yolo8_detect_files',
-      [
-        new Parameter('confidence_threshold', '', 'number'),
-        new Parameter('iou_threshold', '', 'number'),
-        new Parameter('resize_image_size', '', 'number'),
-      ],
+      [],
       new Map<string, string>([
         ['Run', 'xxx url'],
       ]),
@@ -291,11 +279,7 @@ export class ModelExampleFormComponent implements OnInit {
         '',
         '',
         'http://100.27.155.124:8888/download_yolo8_detect_files',
-        [
-          new Parameter('confidence_threshold', '', 'number'),
-          new Parameter('iou_threshold', '', 'number'),
-          new Parameter('resize_image_size', '', 'number'),
-        ],
+        [],
         new Map<string, string>([
           [
             'Upload Image: od model training',
@@ -520,6 +504,26 @@ export class ModelExampleFormComponent implements OnInit {
         this.parametersForm.value.image_number_for_each_prompt,
         this.parametersForm.value.YOLO_model
       );
+    } else if (
+      this.model ===
+      'bbox-feature-visualiztion-for-different-datasets'
+    ) {
+      this.modelService.bboxFeatureVistualizationOfdifferentData();
+    } else if (
+      this.model ===
+      'bbox-feature-visualiztion-for-od-train-data-and-od-test-data'
+    ) {
+      this.modelService.bboxFeatureVistualizationOfOdData();
+    } else if (
+      this.model ===
+      'image-feature-visualiztion-for-different-datasets'
+    ) {
+      this.modelService.imageFeatureVistualizationOfdifferentData();
+    } else if (
+      this.model ===
+      'image-feature-visualiztion-for-od-train-data-and-od-test-data'
+    ) {
+      this.modelService.imageFeatureVistualizationOfOdData();
     } else if (
       this.model ===
       'bbox-feature-visualiztion-for-lora-train-data-and-ai-generated-data'

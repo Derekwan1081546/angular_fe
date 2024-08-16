@@ -21,6 +21,10 @@ export class ModelService {
   static readonly AUTO_PIPELINE_A = 'http://100.27.155.124:8888//auto_pipeline_a';
   static readonly BBOX_FEATURE_VISUALIZATION_FOR_LORA_TRAIN = 'http://100.27.155.124:8888//bbox_feature_visualiztion_for_lora_train_data_and_ai_generated_data';
   static readonly IMAGE_FEATURE_VISUALIZATION_FOR_LORA_TRAIN = 'http://100.27.155.124:8888//image_feature_visualiztion_for_lora_train_data_and_ai_generated_data';
+  static readonly BBOX_FEATURE_VISUALIZATION_FOR_DIFFERENT_DATASET = 'http://100.27.155.124:8888//bbox_feature_visualiztion_for_different_datasets';
+  static readonly BBOX_FEATURE_VISUALIZATION_FOR_OD_DATA = 'http://100.27.155.124:8888//bbox_feature_visualiztion_for_od_train_data_and_od_test_data';
+  static readonly IMAGE_FEATURE_VISUALIZATION_FOR_DIFFERENT_DATASET = 'http://100.27.155.124:8888//image_feature_visualiztion_for_different_datasets';
+  static readonly IMAGE_FEATURE_VISUALIZATION_FOR_OD_DATA = 'http://100.27.155.124:8888//image_feature_visualiztion_for_od_train_data_and_od_test_data';
   static readonly CLEAR_TRAIN_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_training';
   static readonly CLEAR_TEST_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_testing';
   static readonly CLEAR_DETECT_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_od_model_detecting';
@@ -569,6 +573,137 @@ export class ModelService {
     console.log(data);
     this.http
       .post(ModelService.AUTO_PIPELINE_A, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+              alert('task complete');
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+  bboxFeatureVistualizationOfdifferentData(
+  ) {
+    this.http
+      .post(ModelService.BBOX_FEATURE_VISUALIZATION_FOR_DIFFERENT_DATASET, {}, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+              alert('task complete');
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  bboxFeatureVistualizationOfOdData(
+  ) {
+    this.http
+      .post(ModelService.BBOX_FEATURE_VISUALIZATION_FOR_DIFFERENT_DATASET, {}, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+              alert('task complete');
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  imageFeatureVistualizationOfdifferentData(
+  ) {
+    this.http
+      .post(ModelService.IMAGE_FEATURE_VISUALIZATION_FOR_DIFFERENT_DATASET, {}, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+              alert('task complete');
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+  }
+
+  imageFeatureVistualizationOfOdData(
+  ) {
+    this.http
+      .post(ModelService.IMAGE_FEATURE_VISUALIZATION_FOR_OD_DATA, {}, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'application/json',
