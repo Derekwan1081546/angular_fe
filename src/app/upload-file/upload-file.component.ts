@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { UploadFileService } from '../model-examples/upload-file.service';
+import { NONE_TYPE } from '@angular/compiler';
 
 class FileInfo {
   index: number = 0;
@@ -25,6 +26,7 @@ class FileInfo {
 })
 export class UploadFileComponent implements OnInit {
   static readonly unitScale: number = 1024 * 1024;
+  filenames: string[] = [];
   files!: FileList;
   fileInfoList: FileInfo[] = [];
   currentPage: number = 0;
@@ -121,12 +123,28 @@ export class UploadFileComponent implements OnInit {
   }
 
   handleSelectedFiles(files: FileList) {
-    this.files = files;
     this.fileInfoList = [];
     this.pageList = [];
     this.currentPage = 0;
 
-    const maxSize = files.length < this.numRows ? files.length : this.numRows;
+    const newFiles = new DataTransfer();
+    if (this.files) {
+      for (let index = 0; index < this.files.length; index++) {
+        newFiles.items.add(this.files[index]);
+      }
+    }
+    for (let index = 0; index < files.length; index++) {
+      if (this.filenames.includes(files[index].name)) {
+        continue;
+      }
+      newFiles.items.add(files[index]);
+      this.filenames.push(files[index].name);
+    }
+
+    this.files = newFiles.files;
+
+    const maxSize =
+      this.files.length < this.numRows ? this.files.length : this.numRows;
     for (let index = 0; index < maxSize; index++) {
       const element = this.files[index];
       this.fileInfoList.push(
@@ -147,6 +165,8 @@ export class UploadFileComponent implements OnInit {
   }
 
   clear() {
+    this.files = new DataTransfer().files;
+    this.filenames = [];
     this.fileInfoList = [];
     this.currentPage = 0;
     this.pageList = [0];
