@@ -22,6 +22,10 @@ export class UploadFileService {
     'http://100.27.155.124:8888/upload_file_for_auto_label';
   static readonly UPLOAD_IMAGE_FOR_AUTO_PIPELINE =
     'http://100.27.155.124:8888/upload_image_file_for_auto_pipeline';
+  static readonly UPLOAD_DATASET_FOR_BBOX_FEATURE_VISTUALIZATION =
+    'http://100.27.155.124:8888/upload_dataset_for_bbox_feature_visualization';
+  static readonly UPLOAD_DATASET_FOR_IMAGE_FEATURE_VISTUALIZATION =
+    'http://100.27.155.124:8888/upload_dataset_for_image_feature_visualization';
 
   statusObserver: Subject<boolean> = new Subject();
 

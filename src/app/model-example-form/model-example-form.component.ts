@@ -227,10 +227,10 @@ export class ModelExampleFormComponent implements OnInit {
       'bbox-feature-visualiztion-for-different-datasets',
       '',
       '',
-      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      'http://100.27.155.124:8888/download_bbox_feature_visualiztion_for_od_train_data_and_od_test_data',
       [],
       new Map<string, string>([
-        ['Run', 'xxx url'],
+        ['Run', 'http://100.27.155.124:8888/upload_dataset_for_bbox_feature_visualization'],
       ]),
       ['dataset'],
       false
@@ -240,7 +240,7 @@ export class ModelExampleFormComponent implements OnInit {
         'bbox-feature-visualiztion-for-od-train-data-and-od-test-data',
         '',
         '',
-        'http://100.27.155.124:8888/download_yolo8_detect_files',
+        'http://100.27.155.124:8888/download_bbox_feature_visualiztion_for_od_train_data_and_od_test_data',
         [],
         new Map<string, string>([
           [
@@ -265,10 +265,10 @@ export class ModelExampleFormComponent implements OnInit {
       'image-feature-visualiztion-for-different-datasets',
       '',
       '',
-      'http://100.27.155.124:8888/download_yolo8_detect_files',
+      'http://100.27.155.124:8888/download_images_feature_visualization_for_different_datasets',
       [],
       new Map<string, string>([
-        ['Run', 'xxx url'],
+        ['Run', 'http://100.27.155.124:8888/upload_dataset_for_image_feature_visualization'],
       ]),
       ['dataset'],
       false
@@ -278,7 +278,7 @@ export class ModelExampleFormComponent implements OnInit {
         'image-feature-visualiztion-for-od-train-data-and-od-test-data',
         '',
         '',
-        'http://100.27.155.124:8888/download_yolo8_detect_files',
+        'http://100.27.155.124:8888/download_image_feature_visualiztion_for_od_train_data_and_od_test_data',
         [],
         new Map<string, string>([
           [

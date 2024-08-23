@@ -32,6 +32,8 @@ export class ModelService {
   static readonly CLEAR_BBOX_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_bbox_feature_visualization';
   static readonly CLEAR_IMAGE_FEATURE_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_image_feature_visualization';
   static readonly CLEAR_NEW_LORA_GENERATE_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_generate_images_with_new_lora';
+  static readonly CLEAR_LORA_TRAIN_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_lora_training';
+  static readonly CLEAR_AUTO_LABEL_IMAGE = 'http://100.27.155.124:8888/clear_folder_for_auto_label';
   
   statusObserver: Subject<boolean> = new Subject();
 
@@ -1043,10 +1045,8 @@ export class ModelService {
   }
 
   clearImage() {
-    const data = JSON.stringify({
-    });
     this.http
-      .post(ModelService.CLEAR_TRAIN_IMAGE, data, {
+      .post(ModelService.CLEAR_TRAIN_IMAGE, {}, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'application/json',
@@ -1074,8 +1074,120 @@ export class ModelService {
         },
       });
       
-      this.http
-      .post(ModelService.CLEAR_DETECT_IMAGE, data, {
+    this.http
+      .post(ModelService.CLEAR_TEST_IMAGE, {}, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+    this.http
+      .post(ModelService.CLEAR_DETECT_IMAGE, {}, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+    this.http
+      .post(ModelService.CLEAR_AUTO_PIPELINE_IMAGE, {}, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+    this.http
+      .post(ModelService.CLEAR_BBOX_IMAGE, {}, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe({
+        next: (event) => {
+          if (event.type == HttpEventType.Response) {
+            if (event.ok) {
+              console.warn(event);
+              this.statusObserver.next(true);
+            } else {
+              console.error(event);
+              this.statusObserver.next(false);
+            }
+          }
+        },
+        error: (error) => {
+          console.error(error);
+          this.statusObserver.next(false);
+        },
+      });
+    this.http
+      .post(ModelService.CLEAR_IMAGE_FEATURE_IMAGE, {}, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'application/json',
@@ -1103,7 +1215,7 @@ export class ModelService {
         },
       });
       this.http
-      .post(ModelService.CLEAR_TEST_IMAGE, data, {
+      .post(ModelService.CLEAR_NEW_LORA_GENERATE_IMAGE, {}, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'application/json',
@@ -1130,8 +1242,8 @@ export class ModelService {
           this.statusObserver.next(false);
         },
       });
-      this.http
-      .post(ModelService.CLEAR_AUTO_PIPELINE_IMAGE, data, {
+    this.http
+      .post(ModelService.CLEAR_LORA_TRAIN_IMAGE, {}, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'application/json',
@@ -1158,36 +1270,8 @@ export class ModelService {
           this.statusObserver.next(false);
         },
       });
-      this.http
-      .post(ModelService.CLEAR_BBOX_IMAGE, data, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'content-type': 'application/json',
-        },
-        responseType: 'text',
-        reportProgress: true,
-        observe: 'events',
-      })
-      .pipe()
-      .subscribe({
-        next: (event) => {
-          if (event.type == HttpEventType.Response) {
-            if (event.ok) {
-              console.warn(event);
-              this.statusObserver.next(true);
-            } else {
-              console.error(event);
-              this.statusObserver.next(false);
-            }
-          }
-        },
-        error: (error) => {
-          console.error(error);
-          this.statusObserver.next(false);
-        },
-      });
-      this.http
-      .post(ModelService.CLEAR_IMAGE_FEATURE_IMAGE, data, {
+    this.http
+      .post(ModelService.CLEAR_AUTO_LABEL_IMAGE, {}, {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'content-type': 'application/json',
