@@ -233,7 +233,6 @@ export class ModelExampleFormComponent implements OnInit {
         ['Run', 'http://100.27.155.124:8888/upload_dataset_for_bbox_feature_visualization'],
       ]),
       ['dataset_name'],
-      false
     ),
     'bbox-feature-visualiztion-for-od-train-data-and-od-test-data':
       new SupportedModel(
@@ -271,7 +270,6 @@ export class ModelExampleFormComponent implements OnInit {
         ['Run', 'http://100.27.155.124:8888/upload_dataset_for_image_feature_visualization'],
       ]),
       ['dataset_name'],
-      false
     ),
     'image-feature-visualiztion-for-od-train-data-and-od-test-data':
       new SupportedModel(
