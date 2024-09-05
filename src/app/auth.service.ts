@@ -7,6 +7,7 @@ import { Observable, Subject, throwIfEmpty } from 'rxjs';
 })
 export class AuthService {
   private static readonly SIGNIN = 'http://54.236.230.38:8080/api/v2/auth/signin';
+  private static readonly SIGNUP = 'http://54.236.230.38:8080/api/v2/auth/signup';
 
   private username: string = '';
   private valid: boolean = false;
@@ -73,6 +74,44 @@ export class AuthService {
       });
   }
 
+  signUp(firstname: string, lastname: string, email: string, password: string, password_check: string) {
+    const data = JSON.stringify({
+      firstname: firstname,
+      lastname: lastname,
+      email: email,
+      password: password,
+      password_check: password_check,
+      role: "normal_user",
+    });
+    this.http
+      .post(AuthService.SIGNUP, data, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'content-type': 'application/json',
+        },
+        responseType: 'text',
+        reportProgress: true,
+        observe: 'events',
+      })
+      .pipe()
+      .subscribe((event) => {
+        if (event.type == HttpEventType.Response) {
+          if (event.ok) {
+            const rsp = JSON.parse(event.body!);
+            if (rsp['err']) {
+              this.validObserver.next(false);
+              this.tokenObserver.next('');
+              return;
+            }
+            this.tokenObserver.next(rsp['token']);
+            this.validObserver.next(true);
+          } else {
+            this.validObserver.next(false);
+          }
+        }
+      });
+  }
+  
   signOut() {
     this.username = '';
     this.token = '';
