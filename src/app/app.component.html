@@ -44,12 +44,26 @@
             Search
           </button>
         </form>
-        <app-signin class="ms-2"></app-signin>
-        <app-signup class="ms-2"></app-signup>
-      </div>
-    </div>
-  </nav>
-</div>
+        <!-- <app-signin  (toggleSignupDropdown)="toggleSignUpForm()" class="ms-2"></app-signin>
+        <app-signup  (toggleSignInDropdown)="toggleSignInForm()"class="ms-2"></app-signup> -->
+        <!-- 根據 showSignUpForm 來顯示 SignupComponent -->
+        <!-- <app-signin [showDropdown]="showSignInDropdown && !showSignUpDropdown" (toggleSignUpDropdown)="toggleSignUpDropdown()" class="ms-2"></app-signin>
+        <app-signup [showDropdown2]="showSignUpDropdown && !showSignInDropdown"(toggleSignInDropdown)="toggleSignInDropdown()" class="ms-2"></app-signup> -->
+        <app-signin
+          *ngIf="showSignInDropdown"
+          [showDropdown]="showSignInDropdown"
+          (toggleSignUpDropdown)="handleToggleSignUpDropdown()">
+        </app-signin>
+
+        <app-signup
+          *ngIf="showSignUpDropdown"
+          [showDropdown2]="showSignUpDropdown"
+          (toggleSignInDropdown)="handleToggleSignInDropdown()">
+        </app-signup>
+              </div>
+            </div>
+          </nav>
+        </div>
 
 <div class="m-4">
   <router-outlet></router-outlet>

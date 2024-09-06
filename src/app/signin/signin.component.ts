@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +12,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './signin.component.scss',
 })
 export class SigninComponent implements OnInit {
+  @Input() showDropdown: boolean = false;
+  @Output() toggleSignUpDropdown = new EventEmitter<void>(); // 定義事件
+
   disabled: boolean = false;
   inprogress: boolean = false;
   username: string = '';
@@ -40,6 +43,7 @@ export class SigninComponent implements OnInit {
       this.signInForm.value.password!
     );
   }
+
 
   signOut() {
     this.service.signOut();

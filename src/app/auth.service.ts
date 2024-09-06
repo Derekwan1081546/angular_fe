@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
 import { Observable, Subject, throwIfEmpty } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class AuthService {
   validObserver: Subject<boolean> = new Subject();
   tokenObserver: Subject<string> = new Subject();
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient, private router: Router) {
     this.tokenObserver.subscribe((value) => {
       this.token = value;
     });
@@ -103,14 +104,19 @@ export class AuthService {
               this.tokenObserver.next('');
               return;
             }
-            this.tokenObserver.next(rsp['token']);
-            this.validObserver.next(true);
+            // this.tokenObserver.next(rsp['token']);
+            // this.validObserver.next(true);
+            // 成功之後導航到 signin component
+            // 成功註冊後觸發 signin 按鈕
+            
           } else {
             this.validObserver.next(false);
           }
         }
       });
   }
+  
+  
   
   signOut() {
     this.username = '';
