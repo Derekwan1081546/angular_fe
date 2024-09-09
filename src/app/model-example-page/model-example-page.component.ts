@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 class Example {
   title: string = '';
@@ -203,4 +204,40 @@ export class ModelExamplePageComponent {
       form_type: 'default',
     },
   ];
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    // 從 localStorage 中讀取 role
+    const role = localStorage.getItem('role');
+    if (role) {
+      console.log('Role:', role);
+      this.filterExamplesBasedOnRole(role);
+    } else {
+      console.error('No role information found in localStorage.');
+    }
+  }
+
+  private filterExamplesBasedOnRole(role: string) {
+    // 如果 role 為 "internal_user"，直接允許所有功能
+    if (role === 'internal_user') {
+      return;
+    }
+  
+    // 根據其他 role 的邏輯來篩選功能
+    this.examples = this.examples.filter((example) => {
+      if (role.includes('generateimage') && 
+          ['lora-training', 'generate-image-with-no-lora', 'generate-image-with-existing-lora', 'generate-image-with-new-lora'].includes(example.model)) {
+        return true;
+      }
+      if (role.includes('autolabel') && example.model === 'auto-label') {
+        return true;
+      }
+      if (role.includes('modeltrain') && 
+          ['yolov8-testing', 'yolov8-training', 'yolov8-detecting', 'yolov3tiny-training', 'yolov3tiny-testing', 'qai-Hub-testing', 'qai-Hub-detecting'].includes(example.model)) {
+        return true;
+      }
+      return false;
+    });
+  }
+  
 }

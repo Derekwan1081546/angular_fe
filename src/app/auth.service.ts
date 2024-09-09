@@ -68,6 +68,11 @@ export class AuthService {
             }
             this.tokenObserver.next(rsp['token']);
             this.validObserver.next(true);
+            // 傳遞 role 資訊
+            console.log(rsp); // 確認 rsp 是否包含 role
+            // 將 role 保存到 localStorage
+            localStorage.setItem('role', rsp['role']);
+            this.router.navigate(['/model-examples']);
           } else {
             this.validObserver.next(false);
           }
@@ -122,5 +127,7 @@ export class AuthService {
     this.username = '';
     this.token = '';
     this.validObserver.next(false);
+    // 導航回主頁面
+    this.router.navigate(['/']);
   }
 }
