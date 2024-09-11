@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private static readonly SIGNIN = 'http://54.236.230.38:8080/api/v2/auth/signin';
-  private static readonly SIGNUP = 'http://54.236.230.38:8080/api/v2/auth/signup';
+  private static readonly SIGNIN = 'http://bev2loadbalancer-61644974.us-east-1.elb.amazonaws.com/api/v2/auth/signin';
+  private static readonly SIGNUP = 'http://bev2loadbalancer-61644974.us-east-1.elb.amazonaws.com/api/v2/auth/signup';
 
   private username: string = '';
   private valid: boolean = false;
